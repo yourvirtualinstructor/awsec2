@@ -2,18 +2,17 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = "5.0"
     }
   }
 }
 
-# Configure the AWS Provider
 provider "aws" {
-  region = "us-east-1"
+  region = "us-east-2"
 }
 
 resource "aws_vpc" "my_vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = "10.1.0.0/16"
 
   tags = {
     created_by = "terraform"
@@ -22,7 +21,7 @@ resource "aws_vpc" "my_vpc" {
 
 resource "aws_subnet" "my_subnet" {
   vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = "10.0.0.0/24"
+  cidr_block        = "10.1.0.0/24"
   availability_zone = "us-east-2a"
 
   tags = {
@@ -32,7 +31,7 @@ resource "aws_subnet" "my_subnet" {
 
 resource "aws_network_interface" "mynic" {
   subnet_id   = aws_subnet.my_subnet.id
-  private_ips = ["10.0.0.100"]
+  private_ips = ["10.1.0.100"]
 
   tags = {
     Name = "primary_network_interface"
