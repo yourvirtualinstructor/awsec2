@@ -28,7 +28,7 @@ resource "aws_network_interface" "mynic" {
 
 resource "aws_instance" "myvm" {
   ami           = "ami-01103fb68b3569475" #
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
 
   network_interface {
     network_interface_id = aws_network_interface.mynic.id
